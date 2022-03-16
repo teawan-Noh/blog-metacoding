@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 // 사용자의 요청 -> 응답(HTML 파일) : @Controller
@@ -15,20 +17,20 @@ public class HttpControllerTest {
 	//인터넷 브라우저 요청은 무조건 get 요청밖에 할 수 없다
 	//hppt:/localhost:8080/http/get : (select)
 	@GetMapping("/http/get")
-	public String getTest() {
-		return "get 요청";
+	public String getTest(Member m) { //개별 변수를 요청하고 싶으면 @RequestParam을 사용 (ex: @RequestParam int id, String username) // MessageConverter(스프링부트)
+		return "get 요청 : " + m.getId() + ", " + m.getUsername() + ", " + m.getPassword() + ", " + m.getEmail();
 	}
 	
 	//hppt:/localhost:8080/http/post : (insert)
 	@PostMapping("/http/post")
-	public String postTest() {
-		return "post 요청";
+	public String postTest(@RequestBody Member m) { //MessageConverter(스프링부트)가 자동으로 매핑해줌
+		return "post 요청 : " + m.getId() + ", " + m.getUsername() + ", " + m.getPassword() + ", " + m.getEmail();
 	}
 	
 	//hppt:/localhost:8080/http/put : (update)
 	@PutMapping("/http/put")
-	public String putTest() {
-		return "put 요청";
+	public String putTest(@RequestBody Member m) {
+		return "put 요청" + m.getId() + ", " + m.getUsername() + ", " + m.getPassword() + ", " + m.getEmail();
 
 
 	}
