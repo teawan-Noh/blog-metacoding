@@ -1,19 +1,31 @@
 package com.cos.blog.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Board {
 
@@ -30,9 +42,13 @@ public class Board {
 	@ColumnDefault("0")
 	private int count; // 조회수
 	
-	@ManyToOne //Many = Many, User = One
+	@ManyToOne(fetch = FetchType.EAGER) //Many = Many, User = One
 	@JoinColumn(name="userId")
-	private User user; // DB는 오브젝트를 저장할 수 없다. FK,자바는 오브젝트를 저장할 수 있다.
+	private User user; // DB는 오브젝트를 저장할수 없다. FK,자바는 오브젝트를 저장할수 있다.
+	
+	//reply 클래스에 보드변수에 맵핑됨
+	@OneToMany(mappedBy="board", fetch = FetchType.LAZY) //하나의 게시글은 여러개의 댓글을 가질수 있다. //mappedBy는 연관관계의 주인이 아니다 (난FK가 아니예요) DB에 칼럼을 만들지마세요
+	private List<Reply> reply;
 	
 	@CreationTimestamp
 	private Timestamp createDate;
