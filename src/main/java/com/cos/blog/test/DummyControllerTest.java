@@ -108,7 +108,7 @@ public class DummyControllerTest {
 		// 스프링부트는 MessageConverter가 응답시에 자동 작동
 		// 만약 자바 오브젝트를 리턴하게 되면 MessageConverter가 Jackson 라이브러리를 호출해서
 		// user 오브젝트를 json으로 변환해서 브라우저에 던져줍니다.
-		return user; 
+		return user;
 	}
 	
 	
