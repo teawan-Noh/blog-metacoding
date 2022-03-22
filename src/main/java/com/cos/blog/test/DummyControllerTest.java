@@ -37,7 +37,7 @@ public class DummyControllerTest {
 		} catch (EmptyResultDataAccessException e) { //Exception 으로 걸어도 되지만 다른 Exception이 걸렸을 수도 있으니 정확하게 하기위해 정확한거 걸어줌
 			return "삭제에 실패하였습니다. 없는 ID입니다.";
 		}
-		return "삭제되었습니다. id:" + id; 
+		return "삭제되었습니다. id:" + id;
 	}
 	
 	// save함수는 id를 전달하지 않으면 insert를 해주고
