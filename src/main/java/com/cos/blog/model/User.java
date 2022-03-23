@@ -19,7 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data  //Getter ,Setter 합친거
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder //빌더 패턴
@@ -32,7 +32,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
 	private int id; //시퀀스(Oracle), auto_increment(MySQL)
 	
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 30, unique = true)
 	private String username;
 	
 	@Column(nullable = false, length = 100)  // 해쉬(비밀번호 암호화)
